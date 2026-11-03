@@ -85,12 +85,17 @@ class Account {
 
             value.user_id = userId
 
-            const data = await account.create(value)
+            const dataAccount = await account.create(value)
+            
+            const dataMember =await account_member.create({
+                account_id: dataAccount.id,
+                user_id: dataAccount.user_id
+            })
 
             res.status(401).json({
                 status: 'Berhasil',
                 message: 'Berhasil menambahkan account',
-                data: data
+                dataAcount: dataAccount,
             })
 
         } catch (error) {
